@@ -20,6 +20,7 @@
 
 DNSServer dnsServer;
 ESP8266WebServer server(HTTP_PORT);
+int lastClientCount = -1;
 
 void setup() {
   // Finish initialization of ESP
@@ -108,6 +109,13 @@ void setup() {
 void loop() {
   dnsServer.processNextRequest();
   server.handleClient();
+
+  int currentClientCount = WiFi.softAPgetStationNum();
+  if (lastClientCount != currentClientCount) {
+    lastClientCount = currentClientCount;
+    Serial.print("Connected clients: ");
+    Serial.println(currentClientCount);
+  }
 }
 
 void handleLogin() {

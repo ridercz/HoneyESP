@@ -5,6 +5,7 @@
 #include <SPI.h>
 #include <SD.h>
 
+#define SDCARD_CS_PIN SS
 #define DNS_PORT 53
 #define HTTP_PORT 80
 #define BLOCK_SSID_REQUEST
@@ -32,7 +33,7 @@ void setup() {
 
   // Initialize SD card
   Serial.print("Initializing SD card...");
-  if (SD.begin(SS)) {
+  if (SD.begin(SDCARD_CS_PIN)) {
     Serial.println("OK");
   } else {
     Serial.println("Failed!");

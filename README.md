@@ -6,6 +6,8 @@ This project is intended for social engineering attacks and education. See the [
 
 **For documentation see [wiki pages](https://github.com/ridercz/HoneyESP/wiki) here on GitHub.**
 
+There is also [YouTube video](https://www.youtube.com/watch?v=Nx8krNOBnGw) (in Czech) with project introduction and demo.
+
 ---
 
 ## Contributor Code of Conduct

@@ -1,8 +1,18 @@
+#ifdef ESP8266
 #include <ESP8266WiFi.h>
 #include <ESP8266WebServer.h>
 #include <DNSServer.h>
 #include <ESP8266mDNS.h>
-#include <FS.h>
+#endif
+
+#ifdef ESP32
+#include <WiFi.h>
+#include <WiFiClient.h>
+#include <WebServer.h>
+#include <ESPmDNS.h>
+#include <DNSServer.h>
+#include <SPIFFS.h>
+#endif
 
 #define DNS_PORT 53
 #define HTTP_PORT 80
@@ -20,7 +30,12 @@
 #define FILE_WRITE "a"
 
 DNSServer dnsServer;
+#ifdef ESP8266
 ESP8266WebServer server(HTTP_PORT);
+#endif
+#ifdef ESP32
+WebServer server(HTTP_PORT);
+#endif
 int lastClientCount = -1;
 
 void setup() {
@@ -31,7 +46,7 @@ void setup() {
   Serial.begin(9600);
   Serial.println();
   Serial.println(" _   _                        _____ ____  ____");
-  Serial.println("| | | | ___  _ __   ___ _   _| ____/ ___||  _ \\  ESP8266 honeypot version 1.6");
+  Serial.println("| | | | ___  _ __   ___ _   _| ____/ ___||  _ \\  ESP8266/ESP32 honeypot version 2.0");
   Serial.println("| |_| |/ _ \\| '_ \\ / _ \\ | | |  _| \\___ \\| |_) | SPIFFS Version");
   Serial.println("|  _  | (_) | | | |  __/ |_| | |___ ___) |  __/  github.com/ridercz/HoneyESP");
   Serial.println("|_| |_|\\___/|_| |_|\\___|\\__, |_____|____/|_|     (c) 2018-2019 Michal Altair Valasek");
@@ -49,6 +64,7 @@ void setup() {
   }
 
   // Create SSID
+  WiFi.mode(WIFI_MODE_AP);
   String ssid = DEFAULT_SSID_PREFIX + WiFi.softAPmacAddress();
   if (SPIFFS.exists(FILENAME_SSID)) {
     File ssidFile = SPIFFS.open(FILENAME_SSID, FILE_READ);
@@ -60,6 +76,14 @@ void setup() {
   }
   Serial.print("  MAC:              "); Serial.println(WiFi.softAPmacAddress());
   Serial.print("  Host name:        "); Serial.println(HOSTNAME);
+
+  // Show HW platform
+#ifdef ESP8266
+  Serial.println("  HW platform:      ESP8266");
+#endif
+#ifdef ESP32
+  Serial.println("  HW platform:      ESP32");
+#endif
 
   // Parse IP address and netmask
   IPAddress ip, nm;

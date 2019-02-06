@@ -31,7 +31,7 @@ void setup() {
   Serial.begin(9600);
   Serial.println();
   Serial.println(" _   _                        _____ ____  ____");
-  Serial.println("| | | | ___  _ __   ___ _   _| ____/ ___||  _ \\  ESP8266 honeypot version 1.5");
+  Serial.println("| | | | ___  _ __   ___ _   _| ____/ ___||  _ \\  ESP8266 honeypot version 1.6");
   Serial.println("| |_| |/ _ \\| '_ \\ / _ \\ | | |  _| \\___ \\| |_) | SPIFFS Version");
   Serial.println("|  _  | (_) | | | |  __/ |_| | |___ ___) |  __/  github.com/ridercz/HoneyESP");
   Serial.println("|_| |_|\\___/|_| |_|\\___|\\__, |_____|____/|_|     (c) 2018-2019 Michal Altair Valasek");

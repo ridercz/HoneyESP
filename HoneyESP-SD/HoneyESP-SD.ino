@@ -29,11 +29,11 @@ void setup() {
   // Print banner
   Serial.begin(9600);
   Serial.println();
-  Serial.println(" _   _                        _____ ____  ____                                 ");
-  Serial.println("| | | | ___  _ __   ___ _   _| ____/ ___||  _ \\  ESP8266 honeypot version 1.5  ");
-  Serial.println("| |_| |/ _ \\| '_ \\ / _ \\ | | |  _| \\___ \\| |_) | github.com/ridercz/HoneyESP   ");
-  Serial.println("|  _  | (_) | | | |  __/ |_| | |___ ___) |  __/                                ");
-  Serial.println("|_| |_|\\___/|_| |_|\\___|\\__, |_____|____/|_|     (c) 2018 Michal Altair Valasek");
+  Serial.println(" _   _                        _____ ____  ____");
+  Serial.println("| | | | ___  _ __   ___ _   _| ____/ ___||  _ \\  ESP8266 honeypot version 1.5");
+  Serial.println("| |_| |/ _ \\| '_ \\ / _ \\ | | |  _| \\___ \\| |_) | SD Card Version");
+  Serial.println("|  _  | (_) | | | |  __/ |_| | |___ ___) |  __/  github.com/ridercz/HoneyESP");
+  Serial.println("|_| |_|\\___/|_| |_|\\___|\\__, |_____|____/|_|     (c) 2018-2019 Michal Altair Valasek");
   Serial.println("                        |___/                    www.altairis.cz | www.rider.cz");
   Serial.println();
 

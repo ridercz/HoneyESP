@@ -1,18 +1,17 @@
 #ifdef ESP8266
 #include <ESP8266WiFi.h>
 #include <ESP8266WebServer.h>
-#include <DNSServer.h>
 #include <ESP8266mDNS.h>
-#endif
-
-#ifdef ESP32
+#include <FS.h>
+#else
 #include <WiFi.h>
 #include <WiFiClient.h>
 #include <WebServer.h>
 #include <ESPmDNS.h>
-#include <DNSServer.h>
 #include <SPIFFS.h>
 #endif
+
+#include <DNSServer.h>
 
 #define DNS_PORT 53
 #define HTTP_PORT 80
@@ -32,8 +31,7 @@
 DNSServer dnsServer;
 #ifdef ESP8266
 ESP8266WebServer server(HTTP_PORT);
-#endif
-#ifdef ESP32
+#else
 WebServer server(HTTP_PORT);
 #endif
 int lastClientCount = -1;
@@ -64,7 +62,11 @@ void setup() {
   }
 
   // Create SSID
+#ifdef ESP8266
+  WiFi.mode(WIFI_AP);
+#else
   WiFi.mode(WIFI_MODE_AP);
+#endif
   String ssid = DEFAULT_SSID_PREFIX + WiFi.softAPmacAddress();
   if (SPIFFS.exists(FILENAME_SSID)) {
     File ssidFile = SPIFFS.open(FILENAME_SSID, FILE_READ);
@@ -80,8 +82,7 @@ void setup() {
   // Show HW platform
 #ifdef ESP8266
   Serial.println("  HW platform:      ESP8266");
-#endif
-#ifdef ESP32
+#else
   Serial.println("  HW platform:      ESP32");
 #endif
 

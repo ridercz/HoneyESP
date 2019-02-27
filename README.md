@@ -1,4 +1,4 @@
-The **HoneyESP Project** is fake captive portal/honeypot for ESP8266-based microcontroller boards (NodeMCU, Wemos D1 etc).
+The **HoneyESP Project** is fake captive portal/honeypot for microcontroller boards based on ESP8266 (NodeMCU, Wemos D1 etc) and ESP32 (SPIFFS version only, no SD card support on ESP32 yet).
 
 This project is intended for social engineering attacks and education. See the [usage](https://github.com/ridercz/HoneyESP/wiki/Usage) wiki page on how it works.
 

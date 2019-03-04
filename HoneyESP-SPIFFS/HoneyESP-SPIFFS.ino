@@ -178,14 +178,15 @@ void loop() {
 void handleAdminIndex() {
   // Prepare first part of admin homepage
   String html = ADMIN_HTML_HEADER;
-  html += "<p>HoneyESP version <b>" VERSION "</b> is running, <b>" + String(lastClientCount) + "</b> clients connected.</p>\n";
-  html += "<form method=\"GET\">\n";
+  html += "<p class=\"c\">HoneyESP version <b>" VERSION "/" HW_PLATFORM_NAME "</b> is running, <b>" + String(lastClientCount) + "</b> clients connected.</p>\n";
+  html += "<form method=\"GET\"  class=\"c\">\n";
   html += "<input type=\"submit\" formaction=\"" URL_ADMIN_RESULTS "\" value=\"Show Results\" />\n";
   html += "<input type=\"submit\" formaction=\"" URL_ADMIN_RESET "\" value=\"Reset Device\" />\n";
   html += "</form>\n";
-  html += "<form action=\"" URL_ADMIN_SAVE "\" method=\"POST\">\n<select name=\"currentProfile\" style=\"width:345px\">";
+  html += "<form action=\"" URL_ADMIN_SAVE "\" method=\"POST\" class=\"c\">\n<select name=\"currentProfile\" style=\"width:345px\">";
 
-  // List all profiles
+#ifdef ESP8266
+  // List all profiles - ESP8266
   Dir root = SPIFFS.openDir("/");
   while (root.next()) {
     String fileName = String(root.fileName());
@@ -198,6 +199,24 @@ void handleAdminIndex() {
       }
     }
   }
+#else
+  // List all profiles - ESP32
+  File root = SPIFFS.open("/");
+  while (true) {
+    File f = root.openNextFile();
+    if (!f) break;
+    String fileName = String(f.name());
+    f.close();
+    if (fileName.endsWith(FILENAME_PROFILE_CFG)) {
+      String profileName = fileName.substring(1, fileName.indexOf("/", 1));
+      if (profileName.equalsIgnoreCase(currentProfile)) {
+        html += "<option selected=\"selected\" value=\"" + profileName + "\">" + profileName + " (current)</option>\n";
+      } else {
+        html += "<option value=\"" + profileName + "\">" + profileName + "</option>\n";
+      }
+    }
+  }
+#endif
 
   // Prepare second part of admin homepage
   html += "</select>\n<input type=\"submit\" value=\"Change Profile\" style=\"width: 150px\" /></p>\n</form>";

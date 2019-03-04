@@ -18,31 +18,7 @@
 #endif
 #include <DNSServer.h>
 #include <ArduinoJson.h>
-
-#define VERSION               "3.0.0"
-#define DNS_PORT              53
-#define HTTP_PORT             80
-#define AP_ADDRESS            "10.0.0.1"
-#define AP_NETMASK            "255.255.255.0"
-#define AP_MAX_CLIENTS        8
-#define FILENAME_RESULTS      "/results.txt"
-#define FILENAME_SYSTEM_CFG   "/system.cfg"
-#define FILENAME_PROFILE_CFG  "/profile.cfg"
-#define FILENAME_ADMIN_CSS    "/admin.css"
-#define URL_LOGIN             "/login.htm"
-#define URL_ERROR             "/error.htm"
-#define URL_ADMIN_RESULTS     "results.txt"
-#define URL_ADMIN_SAVE        "save.htm"
-#define URL_ADMIN_RESET       "reset.htm"
-#define URL_ADMIN_CSS         "admin.css"
-#define FILE_READ             "r"
-#define FILE_APPEND           "a"
-#define FILE_WRITE            "w"
-#define RESTART_DELAY         10 // s
-#define ADMIN_HTML_HEADER     "<html><head><title>HoneyESP Administration</title><link rel=\"stylesheet\" href=\"admin.css\" /></head><body><h1>HoneyESP Administration</h1>\n"
-#define ADMIN_HTML_FOOTER     "\n<footer><div>Copyright &copy; Michal A. Valasek - Altairis, 2018-2019</div><div>www.rider.cz | www.altairis.cz | github.com/ridercz/HoneyESP</div></footer></body></html>"
-#define DEFAULT_PROFILE_NAME  "DEFAULT"
-#define DEFAULT_ADMIN_PREFIX  "/admin/"
+#include "HoneyEspConfig.h"
 
 DNSServer dnsServer;
 HTTP_SERVER_TYPE server(HTTP_PORT);
